@@ -1,0 +1,17 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: LogiTrack
+    wait-time-in-ms-when-sync-empty: 3000
+  datasource:
+    url: jdbc:postgresql://localhost:5432/logitrack
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
