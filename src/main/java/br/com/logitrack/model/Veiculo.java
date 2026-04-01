@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Check;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +34,15 @@ public class Veiculo {
     private String modelo;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(20) CHECK (tipo IN ('LEVE', 'PESADO'))")
+    @Column(name = "tipo")
+    @Check(constraints = "tipo IN ('LEVE', 'PESADO'))")
     private TipoVeiculo tipo;
 
     @Column(nullable = false)
     private Integer ano;
 
     @OneToMany(mappedBy = "veiculo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Viagem> viagem = new ArrayList<>();
+    private List<Viagem> viagens = new ArrayList<>();
 
     @OneToMany(mappedBy = "veiculo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Manutencao> manutencoes = new ArrayList<>();

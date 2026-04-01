@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,6 +58,16 @@ public class VeiculoServiceImpl implements IVeiculoService {
 
         return new PageImpl<>(veiculoDTOList, pageable, veiculoDTOList.size());
     }
+
+    @Override
+    public List<VeiculoDTO> listarVeiculosParaSelect() {
+        List<VeiculoDTO> allByOrderByPlacaAsc = veiculoRepository.findAllByOrderByPlacaAsc();
+        if(allByOrderByPlacaAsc.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return allByOrderByPlacaAsc;
+    }
+
 
     private void toVeiculoFromDTO(Veiculo veiculo, VeiculoDTO dto) {
         veiculo.setPlaca(dto.getPlaca());
