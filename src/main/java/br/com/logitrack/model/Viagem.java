@@ -34,7 +34,7 @@ public class Viagem {
     @Column(nullable = false, length = 100)
     private String destino;
 
-    @Column(precision =  10, scale = 2)
+    @Column(name = "km_percorrida", precision =  10, scale = 2)
     private BigDecimal kmPercorrida;
 
     @ManyToOne(fetch = FetchType.LAZY)

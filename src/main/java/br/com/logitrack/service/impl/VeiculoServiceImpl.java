@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class VeiculoServiceImpl implements IVeiculoService {
@@ -66,6 +67,23 @@ public class VeiculoServiceImpl implements IVeiculoService {
             return new ArrayList<>();
         }
         return allByOrderByPlacaAsc;
+    }
+
+    @Override
+    public VeiculoDTO buscarVeiculoPorPlaca(String placa) {
+        Optional<Veiculo> veiculo = veiculoRepository.findByPlaca(placa);
+        return modelMapper.map(veiculo, VeiculoDTO.class);
+    }
+
+    @Override
+    public VeiculoDTO buscarVeiculoPorId(Integer id) {
+        Optional<Veiculo> optionalVeiculo = veiculoRepository.findByIdentificador(id);
+        return modelMapper.map(optionalVeiculo, VeiculoDTO.class);
+    }
+
+    @Override
+    public boolean existsById(Integer idVeiculo) {
+        return veiculoRepository.existsById(idVeiculo);
     }
 
 

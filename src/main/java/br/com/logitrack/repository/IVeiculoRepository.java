@@ -17,6 +17,8 @@ public interface IVeiculoRepository extends JpaRepository<Veiculo, Integer> {
     @Query(value = "SELECT id, placa, modelo, tipo, ano FROM veiculos WHERE id = :id", nativeQuery = true)
     Optional<Veiculo> findByIdentificador(@Param("id") Integer id);
 
+    Optional<Veiculo> findByPlaca(String placa);
+
     @Query(value = "SELECT placa, modelo, tipo, ano FROM veiculos ORDER BY placa ASC", nativeQuery = true)
     List<VeiculoDTO> findAllByOrderByPlacaAsc();
 }

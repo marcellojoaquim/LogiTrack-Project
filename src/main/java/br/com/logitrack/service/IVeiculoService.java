@@ -12,4 +12,7 @@ public interface IVeiculoService {
     VeiculoDTO atualizarVeiculo(Integer id, VeiculoDTO veiculoDTO);
     Page<VeiculoDTO> listarVeiculos(Pageable pageable);
     List<VeiculoDTO> listarVeiculosParaSelect();
+    VeiculoDTO buscarVeiculoPorPlaca(String placa);
+    VeiculoDTO buscarVeiculoPorId(Integer id);
+    boolean existsById(Integer idVeiculo);
 }
