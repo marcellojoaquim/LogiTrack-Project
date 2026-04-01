@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LogiTrack - Frota</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 20px; color: #333; }
+        .container { max-width: 1000px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f8f9fa; color: #555; }
+        tr:hover { background-color: #f1f1f1; }
+        .btn { padding: 8px 12px; text-decoration: none; border-radius: 4px; display: inline-block; }
+        .btn-novo { background-color: #28a745; color: white; margin-bottom: 15px; }
+        .badge { padding: 4px 8px; border-radius: 12px; font-size: 0.85em; font-weight: bold; }
+        .badge-leve { background-color: #d1ecf1; color: #0c5460; }
+        .badge-pesado { background-color: #fff3cd; color: #856404; }
+        .pagination { margin-top: 20px; display: flex; gap: 10px; align-items: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 th:text="${tituloPagina}">Lista de Veículos</h2>
+
+    <a th:href="@{/veiculos/novo}" class="btn btn-novo">+ Novo Veículo</a>
+
+    <div th:if="${mensagemSucesso}" style="color: green; margin-bottom: 15px;">
+        <b th:text="${mensagemSucesso}"></b>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="v : ${veiculos}">
+            <td th:text="${v.placa}">ABC-1234</td>
+            <td th:text="${v.modelo}">Modelo X</td>
+            <td th:text="${v.ano}">2024</td>
+            <td>
+                    <span th:text="${v.tipo}"
+                          th:classappend="${v.tipo.name() == 'LEVE' ? 'badge badge-leve' : 'badge badge-pesado'}">
+                    </span>
+            </td>
+<!--            <td>-->
+<!--                <a th:href="@{/veiculos/editar/{id}(id=${v.id})}">Editar</a>-->
+<!--            </td>-->
+        </tr>
+        <tr th:if="${#lists.isEmpty(veiculos)}">
+            <td colspan="5" style="text-align: center;">Nenhum veículo cadastrado.</td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <div class="pagination" th:if="${pagina.totalPages > 1}">-->
+<!--        <a th:if="${pagina.hasPrevious()}"-->
+<!--           th:href="@{/veiculos(page=${pagina.number - 1}, size=${pagina.size})}">« Anterior</a>-->
+
+<!--        <span>Página <span th:text="${pagina.number + 1}">1</span> de <span th:text="${pagina.totalPages}">5</span></span>-->
+
+<!--        <a th:if="${pagina.hasNext()}"-->
+<!--           th:href="@{/veiculos(page=${pagina.number + 1}, size=${pagina.size})}">Próximo »</a>-->
+<!--    </div>-->
+</div>
+
+</body>
+</html>

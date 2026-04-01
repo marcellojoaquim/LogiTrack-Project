@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class VeiculoServiceImpl implements IVeiculoService {
@@ -60,10 +58,9 @@ public class VeiculoServiceImpl implements IVeiculoService {
         return new PageImpl<>(veiculoDTOList, pageable, veiculoDTOList.size());
     }
 
-    private Veiculo toVeiculoFromDTO(Veiculo veiculo, VeiculoDTO dto) {
+    private void toVeiculoFromDTO(Veiculo veiculo, VeiculoDTO dto) {
         veiculo.setPlaca(dto.getPlaca());
         veiculo.setModelo(dto.getModelo());
         veiculo.setModelo(dto.getModelo());
-        return veiculo;
     }
 }
