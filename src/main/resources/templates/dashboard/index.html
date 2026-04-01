@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>LogiTrack - Dashboard Operacional</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card h3 { margin-top: 0; color: #1a73e8; border-bottom: 2px solid #f0f2f5; padding-bottom: 10px; }
+
+        /* Estilos para a Tabela de Cronograma */
+        .tab-cronograma { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+        .tab-cronograma th { text-align: left; color: #666; padding-bottom: 10px; }
+        .tab-cronograma td { padding: 8px 0; border-bottom: 1px solid #eee; }
+
+        /* Estilo para o Ranking e Financeiro */
+        .destaque-valor { font-size: 2em; font-weight: bold; color: #202124; margin: 10px 0; }
+        .subtexto { color: #5f6368; font-size: 0.9em; }
+        .badge-status { padding: 3px 8px; border-radius: 12px; font-size: 0.8em; background: #e8f0fe; color: #1967d2; }
+    </style>
+</head>
+<body>
+
+<h1 style="margin-bottom: 30px;">Painel de Controle LogiTrack</h1>
+
+<div class="dashboard-grid">
+
+    <div class="card">
+        <h3>Projeção Financeira</h3>
+        <p class="subtexto">Mês de Referência: Abril/2026</p>
+
+        <div class="destaque-valor"
+             th:text="${financeiro != null ? #numbers.formatCurrency(financeiro) : 'R$ 0,00'}">
+            R$ 0,00
+        </div>
+
+        <p class="subtexto">Estimativa baseada nos custos de manutenções.</p>
+    </div>
+
+    <div class="card">
+        <h3>Veículo Mais Utilizado</h3>
+        <p class="subtexto">Maior quilometragem acumulada</p>
+
+        <div class="destaque-valor"
+             th:if="${liderKm != null}"
+             th:text="${#numbers.formatDecimal(liderKm.kmAcumulada, 1, 'POINT', 1, 'COMMA')} + ' km'">
+            0 km
+        </div>
+
+        <p th:if="${liderKm != null}">
+            <strong>Placa:</strong> <span th:text="${liderKm.placa}">ABC-1234</span><br>
+            <strong>Modelo:</strong> <span th:text="${liderKm.modelo}">Modelo</span>
+        </p>
+        <p th:if="${liderKm == null}" class="subtexto">Nenhum veículo registrado.</p>
+    </div>
+
+    <div class="card">
+        <h3>Cronograma de Manutenção</h3>
+        <table class="tab-cronograma">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Veículo</th>
+                <th>Serviço</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="m : ${proximasManutencoes}">
+                <td th:text="${m.dataInicio != null ? #temporals.format(m.dataInicio, 'dd/MM HH:mm') : '--/--'}">01/04</td>
+                <td th:text="${m.placaVeiculo}">ABC-1234</td>
+                <td>
+                    <span th:text="${m.tipoServico}">Troca</span><br>
+                    <span class="badge-status" th:text="${m.status}">PENDENTE</span>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(proximasManutencoes)}">
+                <td colspan="3" style="text-align:center; padding: 20px; color: #999;">
+                    Nenhuma manutenção agendada.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

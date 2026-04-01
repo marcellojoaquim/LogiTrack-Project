@@ -10,13 +10,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class DashboardKmTotalDTO {
 
-    private Integer veiculoId;
     private String placa;
     private String modelo;
-    private BigDecimal kmAcumulada;
+    private Double kmAcumulada;
 
-    public DashboardKmTotalDTO(Integer veiculoId, String placa, String modelo, BigDecimal kmAcumulada) {
-        this.veiculoId = veiculoId;
+    public DashboardKmTotalDTO( String placa, String modelo, Double kmAcumulada) {
         this.placa = placa;
         this.modelo = modelo;
         this.kmAcumulada = kmAcumulada;

@@ -1,15 +1,13 @@
 package br.com.logitrack.model.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class DashboardCronogramaManutencaoDTO {
 
     private Integer id;

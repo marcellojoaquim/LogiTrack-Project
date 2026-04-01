@@ -5,9 +5,11 @@ import br.com.logitrack.model.dto.VeiculoDTO;
 import br.com.logitrack.model.dto.ViagemDTO;
 import br.com.logitrack.repository.IViagemRepository;
 import br.com.logitrack.service.IViagemService;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Service
 public class ViagemServiceImpl implements IViagemService {
 
     private final VeiculoServiceImpl veiculoService;

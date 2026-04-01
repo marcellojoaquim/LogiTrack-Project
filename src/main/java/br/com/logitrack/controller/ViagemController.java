@@ -22,7 +22,7 @@ public class ViagemController {
         this.viagemService = viagemService;
     }
 
-    @GetMapping("/novo")
+    @GetMapping()
     public String novo(Model model) {
         model.addAttribute("Viagem", new ViagemDTO());
         model.addAttribute("veiculos", veiculoService.listarVeiculosParaSelect());
