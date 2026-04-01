@@ -27,5 +27,5 @@ public class ViagemDTO {
     private BigDecimal kmPercorrida;
 
     @NotNull(message = "Id do veículo é obrigatório")
-    private Integer idVeiculo;
+    private Long idVeiculo;
 }

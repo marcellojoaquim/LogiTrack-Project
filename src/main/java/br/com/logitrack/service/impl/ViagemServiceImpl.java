@@ -1,23 +1,31 @@
 package br.com.logitrack.service.impl;
 
 import br.com.logitrack.exception.BusinessException;
+import br.com.logitrack.model.Viagem;
 import br.com.logitrack.model.dto.VeiculoDTO;
 import br.com.logitrack.model.dto.ViagemDTO;
 import br.com.logitrack.repository.IViagemRepository;
 import br.com.logitrack.service.IViagemService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+
 
 @Service
 public class ViagemServiceImpl implements IViagemService {
 
     private final VeiculoServiceImpl veiculoService;
     private final IViagemRepository viagemRepository;
+    private final ModelMapper modelMapper;
 
-    public ViagemServiceImpl(VeiculoServiceImpl veiculoService, IViagemRepository viagemRepository) {
+    public ViagemServiceImpl(VeiculoServiceImpl veiculoService, IViagemRepository viagemRepository, ModelMapper modelMapper) {
         this.veiculoService = veiculoService;
         this.viagemRepository = viagemRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -30,13 +38,38 @@ public class ViagemServiceImpl implements IViagemService {
     }
 
     @Override
-    public ViagemDTO findByIdVeiculo(Integer idVeiculo) {
-        ViagemDTO viagemDTO = viagemRepository.findByIdVeiculo(idVeiculo);
-        if (viagemDTO == null) {
+    public ViagemDTO atualizar(Long id, ViagemDTO viagemDTO) {
+        Optional<Viagem> optional = viagemRepository.findById(id);
+        if(optional.isEmpty()){
+            throw new BusinessException("Viagem não encontrada para o id informado.");
+        }
+        return viagemRepository.save(viagemDTO);
+    }
+
+    public Optional<ViagemDTO> findById(Long id) {
+        Optional<Viagem> optional = viagemRepository.findById(id);
+        ViagemDTO map = modelMapper.map(optional, ViagemDTO.class);
+        return Optional.of(map);
+    }
+
+    @Override
+    public ViagemDTO encerrar(Long id, Instant dataChegada) {
+        viagemRepository.findById(id)
+                .map(v -> {
+                    v.setDataChegada(Instant.now());
+                    return viagemRepository.save(v);
+                }).orElseThrow(() -> new BusinessException("Viagem não encontada para o id informado"));
+        return null;
+    }
+
+    @Override
+    public List<ViagemDTO> findAllByIdVeiculo(Long idVeiculo) {
+        List<ViagemDTO> list = viagemRepository.findAllByIdVeiculo(idVeiculo);
+        if (list.isEmpty()) {
             throw new BusinessException("Viagem não encontrada para o id do veiculo");
         }
 
-        return viagemDTO;
+        return list;
     }
 
     @Override
@@ -45,7 +78,7 @@ public class ViagemServiceImpl implements IViagemService {
     }
 
     @Override
-    public BigDecimal kmTotalPorVeiculo(Integer veiculo) {
+    public BigDecimal kmTotalPorVeiculo(Long veiculo) {
         if(!veiculoService.existsById(veiculo)) {
             throw new BusinessException("Veiculo não encontrado.");
         }

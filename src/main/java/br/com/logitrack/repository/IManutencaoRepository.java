@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface IManutencaoRepository extends JpaRepository<Manutencao, Integer> {
+public interface IManutencaoRepository extends JpaRepository<Manutencao, Long> {
 
     @Query(value = "SELECT * FROM manutencoes WHERE status = 'PEDENTE' AND data_inicio >= CURRENT_TIMESTAMP " +
             "ORDER BY data_inicio ASC LIMIT 5", nativeQuery = true)

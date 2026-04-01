@@ -2,8 +2,6 @@ package br.com.logitrack.service.impl;
 
 import br.com.logitrack.model.dto.DashboardCronogramaManutencaoDTO;
 import br.com.logitrack.model.dto.DashboardKmTotalDTO;
-import br.com.logitrack.model.dto.ManutencaoDTO;
-import br.com.logitrack.model.dto.VeiculoDTO;
 import br.com.logitrack.repository.IManutencaoRepository;
 import br.com.logitrack.service.IManutencaoService;
 import org.modelmapper.ModelMapper;

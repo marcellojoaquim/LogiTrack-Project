@@ -39,7 +39,7 @@ public class VeiculoServiceImpl implements IVeiculoService {
     }
 
     @Override
-    public VeiculoDTO atualizarVeiculo(Integer id, VeiculoDTO veiculoDTO) {
+    public VeiculoDTO atualizarVeiculo(Long id, VeiculoDTO veiculoDTO) {
         if(veiculoRepository.findById(id).isEmpty()) {
             throw new BusinessException("Veiculo não encontrado");
         }
@@ -76,13 +76,13 @@ public class VeiculoServiceImpl implements IVeiculoService {
     }
 
     @Override
-    public VeiculoDTO buscarVeiculoPorId(Integer id) {
+    public VeiculoDTO buscarVeiculoPorId(Long id) {
         Optional<Veiculo> optionalVeiculo = veiculoRepository.findByIdentificador(id);
         return modelMapper.map(optionalVeiculo, VeiculoDTO.class);
     }
 
     @Override
-    public boolean existsById(Integer idVeiculo) {
+    public boolean existsById(Long idVeiculo) {
         return veiculoRepository.existsById(idVeiculo);
     }
 

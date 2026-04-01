@@ -9,10 +9,10 @@ import java.util.List;
 public interface IVeiculoService {
 
     VeiculoDTO cadastrarVeiculo(VeiculoDTO veiculoDTO);
-    VeiculoDTO atualizarVeiculo(Integer id, VeiculoDTO veiculoDTO);
+    VeiculoDTO atualizarVeiculo(Long id, VeiculoDTO veiculoDTO);
     Page<VeiculoDTO> listarVeiculos(Pageable pageable);
     List<VeiculoDTO> listarVeiculosParaSelect();
     VeiculoDTO buscarVeiculoPorPlaca(String placa);
-    VeiculoDTO buscarVeiculoPorId(Integer id);
-    boolean existsById(Integer idVeiculo);
+    VeiculoDTO buscarVeiculoPorId(Long id);
+    boolean existsById(Long idVeiculo);
 }

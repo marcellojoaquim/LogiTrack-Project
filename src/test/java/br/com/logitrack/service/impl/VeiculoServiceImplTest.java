@@ -34,7 +34,7 @@ class VeiculoServiceImplTest {
     private Veiculo veiculo;
     private VeiculoDTO veiculoDTO;
     private final String PLACA = "ABC-1234";
-    private final Integer ID = 1;
+    private final Long ID = 1l;
 
 
     @BeforeEach

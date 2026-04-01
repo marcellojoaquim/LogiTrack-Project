@@ -9,13 +9,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface IVeiculoRepository extends JpaRepository<Veiculo, Integer> {
+public interface IVeiculoRepository extends JpaRepository<Veiculo, Long> {
 
     @Query(value = "SELECT placa, modelo FROM veiculos WHERE placa = :placa", nativeQuery = true)
     boolean verifyVeiculoByPlaca(@Param("placa") String placa);
 
     @Query(value = "SELECT id, placa, modelo, tipo, ano FROM veiculos WHERE id = :id", nativeQuery = true)
-    Optional<Veiculo> findByIdentificador(@Param("id") Integer id);
+    Optional<Veiculo> findByIdentificador(@Param("id") Long id);
 
     Optional<Veiculo> findByPlaca(String placa);
 
