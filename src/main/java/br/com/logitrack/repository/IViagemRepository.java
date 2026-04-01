@@ -1,15 +1,16 @@
 package br.com.logitrack.repository;
 
 import br.com.logitrack.model.Viagem;
-import br.com.logitrack.model.dto.VeiculoDTO;
 import br.com.logitrack.model.dto.ViagemDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Repository
 public interface IViagemRepository extends JpaRepository<Viagem, Long> {
 
     @Query(value = "SELECT * FROM viagens WHERE veiculo_id = :veiculo", nativeQuery = true)
@@ -27,5 +28,7 @@ public interface IViagemRepository extends JpaRepository<Viagem, Long> {
             nativeQuery = true)
     Long volumePorCategoria(@Param("tipo") String tipo);
 
-    List<ViagemDTO> findAllByIdVeiculo(Long idVeiculo);
+    @Query("SELECT new br.com.logitrack.model.dto.ViagemDTO( v.dataSaida, v.dataChegada, v.veiculo.id) " +
+            "FROM Viagem v WHERE v.veiculo.id = :veiculo")
+    List<ViagemDTO> findAllByIdVeiculo(Long veiculo);
 }

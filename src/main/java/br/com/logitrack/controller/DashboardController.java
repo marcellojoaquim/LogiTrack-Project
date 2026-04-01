@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
+
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
@@ -21,14 +23,22 @@ public class DashboardController {
 
     @GetMapping
     public String carregarDashboard(Model model) {
+        try {
 
-        model.addAttribute("kmTotal", viagemService.kmTotal());
+            var km = viagemService.kmTotal();
+            model.addAttribute("kmTotal", km != null ? km : BigDecimal.ZERO);
 
-        model.addAttribute("proximasManutencoes", manutencaoService.buscaProxManutencoes());
+            model.addAttribute("proximasManutencoes", manutencaoService.buscaProxManutencoes());
 
-        model.addAttribute("liderKm", manutencaoService.findVeiculoMaxKm());
+            model.addAttribute("liderKm", manutencaoService.findVeiculoMaxKm());
 
-        model.addAttribute("financeiro", manutencaoService.projecaoFinanceiraMesAtual());
+            model.addAttribute("financeiro", manutencaoService.projecaoFinanceiraMesAtual());
+
+            model.addAttribute("volumePesados", viagemService.volumePorCategoria("PESADOS"));
+
+        } catch (Exception e) {
+            model.addAttribute("error", "Erro ao carregar métricas: " + e.getMessage());
+        }
 
         return "dashboard/index";
     }

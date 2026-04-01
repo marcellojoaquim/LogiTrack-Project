@@ -5,13 +5,15 @@ import br.com.logitrack.model.dto.DashboardCronogramaManutencaoDTO;
 import br.com.logitrack.model.dto.DashboardKmTotalDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+@Repository
 public interface IManutencaoRepository extends JpaRepository<Manutencao, Long> {
 
-    @Query(value = "SELECT * FROM manutencoes WHERE status = 'PEDENTE' AND data_inicio >= CURRENT_TIMESTAMP " +
+    @Query(value = "SELECT * FROM manutencoes WHERE status = 'PENDENTE' AND data_inicio >= CURRENT_DATE " +
             "ORDER BY data_inicio ASC LIMIT 5", nativeQuery = true)
     List<DashboardCronogramaManutencaoDTO> bucarProxManutensoes();
 

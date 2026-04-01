@@ -13,6 +13,12 @@ import java.time.Instant;
 @Builder
 public class ViagemDTO {
 
+    public ViagemDTO(Instant dataSaida, Instant dataChegada, Long idVeiculo) {
+        this.dataSaida = dataSaida;
+        this.dataChegada = dataChegada;
+        this.idVeiculo = idVeiculo;
+    }
+
     @NotNull(message = "A data de saída é obrigatória")
     private Instant dataSaida;
 

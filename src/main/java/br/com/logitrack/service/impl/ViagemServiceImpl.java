@@ -63,8 +63,8 @@ public class ViagemServiceImpl implements IViagemService {
     }
 
     @Override
-    public List<ViagemDTO> findAllByIdVeiculo(Long idVeiculo) {
-        List<ViagemDTO> list = viagemRepository.findAllByIdVeiculo(idVeiculo);
+    public List<ViagemDTO> findAllByIdVeiculo(Long veiculo) {
+        List<ViagemDTO> list = viagemRepository.findAllByIdVeiculo(veiculo);
         if (list.isEmpty()) {
             throw new BusinessException("Viagem não encontrada para o id do veiculo");
         }
@@ -89,6 +89,4 @@ public class ViagemServiceImpl implements IViagemService {
     public Long volumePorCategoria(String tipo) {
         return  viagemRepository.volumePorCategoria(tipo);
     }
-
-
 }

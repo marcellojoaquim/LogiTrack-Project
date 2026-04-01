@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  thymeleaf:
+    cache: false
   application:
     name: LogiTrack
     wait-time-in-ms-when-sync-empty: 3000
