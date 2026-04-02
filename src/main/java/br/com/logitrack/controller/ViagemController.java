@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/viagens")
@@ -60,7 +61,7 @@ public class ViagemController {
     @PostMapping("/encerrar/{id}")
     public String encerrar(@PathVariable Long id, RedirectAttributes attributes) {
         try {
-            viagemService.encerrar(id, Instant.now());
+            viagemService.encerrar(id, LocalDateTime.now());
             attributes.addFlashAttribute("mensagem", "Viagem encerrada com sucesso!");
         } catch (BusinessException e) {
             attributes.addFlashAttribute("erro", e.getMessage());

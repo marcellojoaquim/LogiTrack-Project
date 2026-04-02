@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,10 +54,10 @@ public class ViagemServiceImpl implements IViagemService {
     }
 
     @Override
-    public ViagemDTO encerrar(Long id, Instant dataChegada) {
+    public ViagemDTO encerrar(Long id, LocalDateTime dataChegada) {
         viagemRepository.findById(id)
                 .map(v -> {
-                    v.setDataChegada(Instant.now());
+                    v.setDataChegada(LocalDateTime.now());
                     return viagemRepository.save(v);
                 }).orElseThrow(() -> new BusinessException("Viagem não encontada para o id informado"));
         return null;

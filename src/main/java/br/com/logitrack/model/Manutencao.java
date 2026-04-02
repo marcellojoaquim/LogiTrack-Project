@@ -5,9 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 /*
 
@@ -39,10 +41,12 @@ public class Manutencao {
     private Long id;
 
     @Column(nullable = false)
-    private Instant dataInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataInicio;
 
     @Column(nullable = false)
-    private Instant dataFim;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataFim;
 
     @Column(length = 100, nullable = false)
     private String tipoServico;

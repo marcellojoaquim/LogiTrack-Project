@@ -3,9 +3,11 @@ package br.com.logitrack.model.dto;
 import br.com.logitrack.model.Manutencao;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,10 +17,12 @@ import java.time.Instant;
 public class ManutencaoDTO {
 
     @NotNull(message = "Data de inicio é obrigatória")
-    private Instant dataInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataInicio;
 
     @NotNull(message = "Data final é obrigatória")
-    private Instant dataFim;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataFim;
 
     @NotNull(message = "Tipo de serviço é obrigatório")
     private String tipoServico;

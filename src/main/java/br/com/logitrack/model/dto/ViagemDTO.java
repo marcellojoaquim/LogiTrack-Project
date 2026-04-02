@@ -2,9 +2,11 @@ package br.com.logitrack.model.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -13,16 +15,18 @@ import java.time.Instant;
 @Builder
 public class ViagemDTO {
 
-    public ViagemDTO(Instant dataSaida, Instant dataChegada, Long idVeiculo) {
+    public ViagemDTO(LocalDateTime dataSaida, LocalDateTime dataChegada, Long idVeiculo) {
         this.dataSaida = dataSaida;
         this.dataChegada = dataChegada;
         this.idVeiculo = idVeiculo;
     }
 
     @NotNull(message = "A data de saída é obrigatória")
-    private Instant dataSaida;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataSaida;
 
-    private Instant dataChegada;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataChegada;
 
     @NotNull(message = "A origem é obrigatória")
     private String origem;

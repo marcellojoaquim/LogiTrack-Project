@@ -16,6 +16,7 @@ import org.modelmapper.ModelMapper;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +97,7 @@ class ViagemServiceImplTest {
 
     @Test
     void encerrar() {
-        Instant instant = Instant.now();
+        LocalDateTime instant = LocalDateTime.now();
         Long idViagem = 1L;
 
         Viagem viagem = new Viagem();

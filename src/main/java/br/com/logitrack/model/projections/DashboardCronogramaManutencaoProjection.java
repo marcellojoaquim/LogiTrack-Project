@@ -1,6 +1,9 @@
 package br.com.logitrack.model.projections;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 public interface DashboardCronogramaManutencaoProjection {
 
@@ -8,6 +11,9 @@ public interface DashboardCronogramaManutencaoProjection {
     String getPlacaVeiculo();
     String getModeloVeiculo();
     String getTipoServico();
-    Instant getDataInicio();
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    LocalDateTime getDataInicio();
+
     String getStatus();
 }

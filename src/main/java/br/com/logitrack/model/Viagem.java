@@ -5,9 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -23,10 +24,12 @@ public class Viagem {
     private Long id;
 
     @Column(name = "data_saida",  nullable = false)
-    private Instant dataSaida;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataSaida;
 
     @Column(name = "data_chegada")
-    private Instant dataChegada;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    private LocalDateTime dataChegada;
 
     @Column(nullable = false, length = 100)
     private String origem;

@@ -1,10 +1,10 @@
 # LogiTrack Pro
 
-Empresa fictícia do setor de logística e transportes que opera frotas para entregas interestaduais.
+<h5>Empresa fictícia do setor de logística e transportes que opera frotas para entregas interestaduais.
 Este sistema fornece ao usuário uma leitura clara dos dados do sistema contribuindo na tomada de decisões de forma mais
 consciente, além disso, moderniza a maneira como os dados são tratados e disponibiliza para o usuário uma interface
-amigável contribuindo para uma leitura mais rápida e fluída, também fornece relatórios em um dashboard de análises. 
-
+amigável contribuindo para uma leitura mais rápida e fluída, também fornece relatórios em um dashboard de análises. </h5>
+-----------------------------------------------------------------------
 ## 🚀 Tecnologias
 
 - Java 17
@@ -12,7 +12,7 @@ amigável contribuindo para uma leitura mais rápida e fluída, também fornece 
 - Thymeleaf
 - Docker
 - PostgreSQL
-
+-----------------------------------------------------------------------
 ## ⚙️ Como rodar
 
 ### Pré-requisitos
@@ -34,13 +34,8 @@ docker-compose up -d
 # Para inserir dados no banco, há um script no diretório: resources/db/
 CargaInicial.sql
 ```
-### Observações
-As interfaces estarão disponíveis em:
-- http://localhost:8081/veiculos para veículos
-- http://localhost:8081/dashboard para leitura dos relatórios
 
----
-
+-----------------------------------------------------------------------
 ### 4. 📌 Funcionalidades
 
 Lista os veículos cadastrados.
@@ -52,7 +47,7 @@ Gera os seguintes relatórios:
 - Veículo com maior quilometragem da frota.
 - Cronograma de manutenções futuras.
 
-
+-----------------------------------------------------------------------
 ## 📂 Estrutura
 
     src/
@@ -65,7 +60,19 @@ Gera os seguintes relatórios:
     └── resources/
         ├── templates/
         └── db/
+-----------------------------------------------------------------------
+### Observações
+As interfaces estarão disponíveis em:
+- http://localhost:8081/veiculos para veículos
+  ![Tela de listagem de veiculos](src/main/resources/img/ListaVeiculos.png)
 
+- http://localhost:8081/dashboard para leitura dos relatórios
+  ![Tela de dashboard](src/main/resources/img/dashboard.png)
+
+- http://localhost:8081/viagens para gerar viagens
+
+  ![Tela de formulario de viagens](src/main/resources/img/formularioViagens.png)
+-----------------------------------------------------------------------
 ## 🧪 Testes
 
 Para rodar os testes:

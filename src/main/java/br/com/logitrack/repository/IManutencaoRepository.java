@@ -23,7 +23,7 @@ public interface IManutencaoRepository extends JpaRepository<Manutencao, Long> {
             "ORDER BY m.data_inicio ASC LIMIT 5", nativeQuery = true)
     List<DashboardCronogramaManutencaoProjection> bucarProxManutensoes();
 
-    @Query(value = "SELECT ve.id, ve.placa, SUM(vi.km_percorrida) as distancia_total " +
+    @Query(value = "SELECT ve.id, ve.placa, ve.modelo, SUM(vi.km_percorrida) as distancia_total " +
             "FROM veiculos ve INNER JOIN viagens vi ON ve.id = vi.veiculo_id " +
             "GROUP BY ve.id, ve.placa ORDER BY distancia_total DESC LIMIT 1", nativeQuery = true)
     DashboardKmProjection findVeiculoMaxKm();
