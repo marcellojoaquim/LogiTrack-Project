@@ -5,6 +5,7 @@ Este sistema fornece ao usuário uma leitura clara dos dados do sistema contribu
 consciente, além disso, moderniza a maneira como os dados são tratados e disponibiliza para o usuário uma interface
 amigável contribuindo para uma leitura mais rápida e fluída, também fornece relatórios em um dashboard de análises. </h5>
 -----------------------------------------------------------------------
+
 ## 🚀 Tecnologias
 
 - Java 17
@@ -13,6 +14,7 @@ amigável contribuindo para uma leitura mais rápida e fluída, também fornece 
 - Docker
 - PostgreSQL
 -----------------------------------------------------------------------
+
 ## ⚙️ Como rodar
 
 ### Pré-requisitos
@@ -36,6 +38,7 @@ CargaInicial.sql
 ```
 
 -----------------------------------------------------------------------
+
 ### 4. 📌 Funcionalidades
 
 Lista os veículos cadastrados.
@@ -48,6 +51,7 @@ Gera os seguintes relatórios:
 - Cronograma de manutenções futuras.
 
 -----------------------------------------------------------------------
+
 ## 📂 Estrutura
 
     src/
@@ -61,7 +65,8 @@ Gera os seguintes relatórios:
         ├── templates/
         └── db/
 -----------------------------------------------------------------------
-### Observações
+
+### Interfaces do Usuário
 As interfaces estarão disponíveis em:
 - http://localhost:8081/veiculos para veículos
   ![Tela de listagem de veiculos](src/main/resources/img/ListaVeiculos.png)
@@ -73,6 +78,7 @@ As interfaces estarão disponíveis em:
 
   ![Tela de formulario de viagens](src/main/resources/img/formularioViagens.png)
 -----------------------------------------------------------------------
+
 ## 🧪 Testes
 
 Para rodar os testes:
@@ -81,6 +87,7 @@ Para rodar os testes:
 mvn test
 ```
 
+--------------------------------------------------------------------------
 ## 👤 Autor
 
 Feito por Marcello
