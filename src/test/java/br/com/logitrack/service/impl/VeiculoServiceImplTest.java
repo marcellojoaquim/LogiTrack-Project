@@ -55,7 +55,7 @@ class VeiculoServiceImplTest {
 
     @Test
     void cadastrarVeiculo() {
-        when(repository.verifyVeiculoByPlaca(PLACA)).thenReturn(false);
+        when(repository.existsByPlaca(PLACA)).thenReturn(false);
         when(repository.save(any(Veiculo.class))).thenReturn(veiculo);
         when(modelMapper.map(any(Veiculo.class), eq(VeiculoDTO.class))).thenReturn(veiculoDTO);
 

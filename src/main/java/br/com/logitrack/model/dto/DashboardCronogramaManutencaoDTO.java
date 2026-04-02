@@ -10,7 +10,7 @@ import java.time.Instant;
 @AllArgsConstructor
 public class DashboardCronogramaManutencaoDTO {
 
-    private Integer id;
+    private Long id;
     private String placaVeiculo;
     private String modeloVeiculo;
     private String tipoServico;

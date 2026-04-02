@@ -1,11 +1,15 @@
-# Nome do Projeto
+# LogiTrack Pro
 
-Breve descrição do projeto. Explique o propósito e o valor dele.
+Empresa fictícia do setor de logística e transportes que opera frotas para entregas interestaduais.
+Este sistema fornece ao usuário uma leitura clara dos dados do sistema contribuindo na tomada de decisões de forma mais
+consciente, além disso, moderniza a maneira como os dados são tratados e disponibiliza para o usuário uma interface
+amigável contribuindo para uma leitura mais rápida e fluída, também fornece relatórios em um dashboard de análises. 
 
 ## 🚀 Tecnologias
 
 - Java 17
 - Spring Boot
+- Thymeleaf
 - Docker
 - PostgreSQL
 
@@ -19,33 +23,48 @@ Breve descrição do projeto. Explique o propósito e o valor dele.
 
 ```bash
 # Clonar o repositório
-git clone https://github.com/seu-repo.git
+git clone https://github.com/marcellojoaquim/LogiTrack-Project.git
 
 # Entrar na pasta
-cd projeto
+cd LogiTrack
 
 # Subir com docker
 docker-compose up -d
+
+# Para inserir dados no banco, há um script no diretório: resources/db/
+CargaInicial.sql
 ```
+### Observações
+As interfaces estarão disponíveis em:
+- http://localhost:8081/veiculos para veículos
+- http://localhost:8081/dashboard para leitura dos relatórios
 
 ---
 
 ### 4. 📌 Funcionalidades
-Liste o que o sistema faz.
 
-## 📌 Funcionalidades
+Lista os veículos cadastrados.
+Insere viagens e Manutenções.
+CRUD completo de viagens. 
+Gera os seguintes relatórios:
+- KM Total Rodada pela frota.
+- Projeção Financeira baseada em futuras manutenções.
+- Veículo com maior quilometragem da frota.
+- Cronograma de manutenções futuras.
 
-- Cadastro de usuários
-- Login com autenticação JWT
-- CRUD de produtos
 
 ## 📂 Estrutura
 
-src/
- ├── controller/
- ├── service/
- ├── repository/
- └── model/
+    src/
+    ├── config/
+    ├── controller/
+    ├── exception/
+    ├── service/
+    ├── repository/
+    ├── model/
+    └── resources/
+        ├── templates/
+        └── db/
 
 ## 🧪 Testes
 

@@ -47,8 +47,8 @@
                     </div>
                     <div>
                         <p class="text-muted mb-0 small uppercase fw-bold">Projeção Financeira (Mês)</p>
-                        <h3 class="mb-0 fw-bold text-success"
-                            th:text="${financeiro != null ? #numbers.formatCurrency(financeiro) : 'R$ 0,00'}">R$ 0,00</h3>
+                        <h3 th:text="${#numbers.formatDecimal(financeiro, 1, 'POINT', 2, 'COMMA')} + ' R$'">
+                        </h3>
                     </div>
                 </div>
             </div>

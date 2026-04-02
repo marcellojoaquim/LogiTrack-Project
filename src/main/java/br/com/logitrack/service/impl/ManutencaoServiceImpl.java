@@ -2,6 +2,9 @@ package br.com.logitrack.service.impl;
 
 import br.com.logitrack.model.dto.DashboardCronogramaManutencaoDTO;
 import br.com.logitrack.model.dto.DashboardKmTotalDTO;
+import br.com.logitrack.model.projections.DashboardCronogramaManutencaoProjection;
+import br.com.logitrack.model.projections.DashboardKmProjection;
+import br.com.logitrack.model.projections.VeiculoKmProjection;
 import br.com.logitrack.repository.IManutencaoRepository;
 import br.com.logitrack.service.IManutencaoService;
 import org.modelmapper.ModelMapper;
@@ -24,35 +27,42 @@ public class ManutencaoServiceImpl implements IManutencaoService {
 
     @Override
     public List<DashboardCronogramaManutencaoDTO> buscaProxManutencoes() {
-        List<DashboardCronogramaManutencaoDTO> dashboardCronogramaManutencaoDTOS = manutencaoRepository.bucarProxManutensoes();
-        if(dashboardCronogramaManutencaoDTOS.isEmpty()) {
+        List<DashboardCronogramaManutencaoProjection> projections = manutencaoRepository.bucarProxManutensoes();
+        if (projections.isEmpty()) {
             return new ArrayList<>();
         }
-        return dashboardCronogramaManutencaoDTOS;
+
+        return projections.stream()
+                .map(p -> DashboardCronogramaManutencaoDTO.builder()
+                        .id(p.getId())
+                        .placaVeiculo(p.getPlacaVeiculo())
+                        .modeloVeiculo(p.getModeloVeiculo())
+                        .tipoServico(p.getTipoServico())
+                        .dataInicio(p.getDataInicio())
+                        .status(p.getStatus())
+                        .build()
+                )
+                .toList();
     }
 
     @Override
     public DashboardKmTotalDTO findVeiculoMaxKm() {
-        Object resultado = manutencaoRepository.findVeiculoMaxKm();
-        if (resultado == null) {
+        DashboardKmProjection veiculoKmProjection = manutencaoRepository.findVeiculoMaxKm();
+        if (veiculoKmProjection == null) {
             return null;
         }
 
-        Object[] colunas = (Object[]) resultado;
-
-        String placa = (String) colunas[0];
-        String modelo = (String) colunas[1];
-        Double kmTotal = 0.0;
-
-        if (colunas[2] != null) {
-            kmTotal = ((Number) colunas[2]).doubleValue();
-        }
-
-        return new DashboardKmTotalDTO(placa, modelo, kmTotal);
+        return new DashboardKmTotalDTO(
+                veiculoKmProjection.getPlaca(),
+                veiculoKmProjection.getModelo(),
+                veiculoKmProjection.getDistanciaTotal()
+        );
     }
 
     @Override
     public BigDecimal projecaoFinanceiraMesAtual() {
-        return manutencaoRepository.projecaoFinanceiraMesAtual();
+        BigDecimal bigDecimal = manutencaoRepository.projecaoFinanceiraMesAtual();
+
+        return bigDecimal;
     }
 }

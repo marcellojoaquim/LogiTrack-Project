@@ -26,7 +26,7 @@ public class ViagemController {
 
     @GetMapping()
     public String novo(Model model) {
-        model.addAttribute("Viagem", new ViagemDTO());
+        model.addAttribute("viagem", new ViagemDTO());
         model.addAttribute("veiculos", veiculoService.listarVeiculosParaSelect());
         return "viagens/formulario";
     }

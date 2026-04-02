@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Editar Viagem</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Editar Viagem</h2>
+
+<!-- Mensagens -->
+<div th:if="${erro}">
+    <p style="color:red;" th:text="${erro}"></p>
+</div>
+
+<form th:action="@{/viagens/atualizar/{id}(id=${viagem.id})}"
+      th:object="${viagem}"
+      method="post">
+
+    <label>Origem:</label>
+    <input type="text" th:field="*{origem}" />
+
+    <br><br>
+
+    <label>Destino:</label>
+    <input type="text" th:field="*{destino}" />
+
+    <br><br>
+
+    <label>Data de Início:</label>
+    <input type="datetime-local" th:field="*{dataInicio}" />
+
+    <br><br>
+
+    <button type="submit">Atualizar</button>
+
+</form>
+
+<br>
+
+<!-- Encerrar viagem -->
+<form th:action="@{/viagens/encerrar/{id}(id=${viagem.id})}" method="post">
+    <button type="submit">Encerrar Viagem</button>
+</form>
+
+</body>
+</html>

@@ -11,6 +11,8 @@ import lombok.*;
 @Builder
 public class VeiculoDTO {
 
+    private Long id;
+
     @NotNull(message = "Placa é obrigatória")
     private String placa;
 

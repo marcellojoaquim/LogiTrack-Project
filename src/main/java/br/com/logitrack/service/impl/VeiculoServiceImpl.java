@@ -28,7 +28,7 @@ public class VeiculoServiceImpl implements IVeiculoService {
 
     @Override
     public VeiculoDTO cadastrarVeiculo(VeiculoDTO veiculoDTO) {
-        if(veiculoRepository.verifyVeiculoByPlaca(veiculoDTO.getPlaca())) {
+        if(veiculoRepository.existsByPlaca(veiculoDTO.getPlaca())) {
             throw new BusinessException("Veiculo já existe");
         }
         Veiculo veiculo = new Veiculo();

@@ -13,14 +13,15 @@ import java.util.Optional;
 @Repository
 public interface IVeiculoRepository extends JpaRepository<Veiculo, Long> {
 
-    @Query(value = "SELECT placa, modelo FROM veiculos WHERE placa = :placa", nativeQuery = true)
-    boolean verifyVeiculoByPlaca(@Param("placa") String placa);
+
+    boolean existsByPlaca(@Param("placa") String placa);
 
     @Query(value = "SELECT id, placa, modelo, tipo, ano FROM veiculos WHERE id = :id", nativeQuery = true)
     Optional<Veiculo> findByIdentificador(@Param("id") Long id);
 
     Optional<Veiculo> findByPlaca(String placa);
 
-    @Query(value = "SELECT placa, modelo, tipo, ano FROM veiculos ORDER BY placa ASC", nativeQuery = true)
+    @Query("SELECT new br.com.logitrack.model.dto.VeiculoDTO(v.id, v.placa, v.modelo, v.tipo, v.ano) " +
+            "FROM Veiculo v ORDER BY v.placa ASC")
     List<VeiculoDTO> findAllByOrderByPlacaAsc();
 }
