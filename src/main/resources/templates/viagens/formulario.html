@@ -67,6 +67,57 @@
                             Cancelar
                         </a>
                     </div>
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-lg-10">
+
+                            <div class="card p-4">
+                                <h4 class="mb-3 fw-bold text-primary">Viagens Registradas</h4>
+
+                                <div class="table-responsive">
+                                    <table class="table table-hover align-middle">
+                                        <thead>
+                                        <tr>
+                                            <th>Veículo</th>
+                                            <th>Origem</th>
+                                            <th>Destino</th>
+                                            <th>Data Saída</th>
+                                            <th>Data Chegada</th>
+                                            <th>KM</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <tr th:each="v : ${viagens}">
+                                            <td class="fw-bold" th:text="${v.placaVeiculo}">ABC-1234</td>
+                                            <td th:text="${v.origem}">Recife</td>
+                                            <td th:text="${v.destino}">São Paulo</td>
+
+                                            <td th:text="${#temporals.format(v.dataSaida, 'dd/MM/yyyy HH:mm')}">
+                                                01/01/2026 10:00
+                                            </td>
+
+                                            <td th:text="${v.dataChegada != null ? #temporals.format(v.dataChegada, 'dd/MM/yyyy HH:mm') : '-'}">
+                                                -
+                                            </td>
+
+                                            <td th:text="${v.kmPercorrida != null ? v.kmPercorrida + ' km' : '-'}">
+                                                1200 km
+                                            </td>
+                                        </tr>
+
+                                        <tr th:if="${#lists.isEmpty(viagens)}">
+                                            <td colspan="6" class="text-center text-muted py-4">
+                                                Nenhuma viagem cadastrada ainda.
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
 
                 </form>
             </div> <div class="text-center mt-4">

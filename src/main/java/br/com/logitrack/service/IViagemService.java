@@ -19,5 +19,5 @@ public interface IViagemService {
     BigDecimal kmTotalPorVeiculo(Long veiculo);
     Long volumePorCategoria(String tipo);
 
-
+    List<ViagemDTO> listarTodas();
 }

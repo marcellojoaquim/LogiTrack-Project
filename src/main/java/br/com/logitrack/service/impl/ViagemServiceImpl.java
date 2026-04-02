@@ -14,6 +14,8 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @Service
@@ -35,7 +37,10 @@ public class ViagemServiceImpl implements IViagemService {
         if(veiculoDTO == null){
             throw new BusinessException("Veiculo não encontrado");
         }
-        return viagemRepository.save(viagemDTO);
+        Viagem viagem = modelMapper.map(viagemDTO, Viagem.class);
+        viagemRepository.save(viagem);
+
+        return viagemDTO;
     }
 
     @Override
@@ -89,5 +94,15 @@ public class ViagemServiceImpl implements IViagemService {
     @Override
     public Long volumePorCategoria(String tipo) {
         return  viagemRepository.volumePorCategoria(tipo);
+    }
+
+    @Override
+    public List<ViagemDTO> listarTodas() {
+        System.out.println("------------VIAGENS "+viagemRepository.findAll().size());
+        return viagemRepository.findAll().stream().map(
+                v -> {
+                    return modelMapper.map(v, ViagemDTO.class);
+                }
+        ).collect(Collectors.toList());
     }
 }

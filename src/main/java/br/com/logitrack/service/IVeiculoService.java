@@ -15,4 +15,5 @@ public interface IVeiculoService {
     VeiculoDTO buscarVeiculoPorPlaca(String placa);
     VeiculoDTO buscarVeiculoPorId(Long id);
     boolean existsById(Long idVeiculo);
+
 }

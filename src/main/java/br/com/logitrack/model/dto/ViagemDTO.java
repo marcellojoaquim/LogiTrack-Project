@@ -10,16 +10,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class ViagemDTO {
 
-    public ViagemDTO(LocalDateTime dataSaida, LocalDateTime dataChegada, Long idVeiculo) {
-        this.dataSaida = dataSaida;
-        this.dataChegada = dataChegada;
-        this.idVeiculo = idVeiculo;
-    }
+
+    private Long id;
 
     @NotNull(message = "A data de saída é obrigatória")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -38,4 +34,23 @@ public class ViagemDTO {
 
     @NotNull(message = "Id do veículo é obrigatório")
     private Long idVeiculo;
+
+    private String placaVeiculo;
+
+    public ViagemDTO(LocalDateTime dataSaida, LocalDateTime dataChegada, Long idVeiculo) {
+        this.dataSaida = dataSaida;
+        this.dataChegada = dataChegada;
+        this.idVeiculo = idVeiculo;
+    }
+
+    public ViagemDTO(Long id, LocalDateTime dataSaida, LocalDateTime dataChegada, String origem, String destino, BigDecimal kmPercorrida, Long idVeiculo, String placaVeiculo) {
+        this.id = id;
+        this.dataSaida = dataSaida;
+        this.dataChegada = dataChegada;
+        this.origem = origem;
+        this.destino = destino;
+        this.kmPercorrida = kmPercorrida;
+        this.idVeiculo = idVeiculo;
+        this.placaVeiculo = placaVeiculo;
+    }
 }

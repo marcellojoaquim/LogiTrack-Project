@@ -32,6 +32,14 @@ public class ViagemController {
         return "viagens/formulario";
     }
 
+    @GetMapping("/novo")
+    public String form(Model model) {
+        model.addAttribute("viagem", new ViagemDTO());
+        model.addAttribute("veiculos", veiculoService.listarVeiculosParaSelect());
+        model.addAttribute("viagens", viagemService.listarTodas());
+        return "viagens/formulario";
+    }
+
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Long id, Model model) {
         try {
@@ -70,8 +78,8 @@ public class ViagemController {
     }
 
     @PostMapping("/novo")
-    public String novo(ViagemDTO dto) {
+    public String novo(@ModelAttribute ViagemDTO dto) {
         viagemService.salvar(dto);
-        return "redirect:/viagens";
+        return "redirect:/viagens/novo";
     }
 }
